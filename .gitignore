@@ -15,7 +15,9 @@
 #sass files
 /src/sass
 /src/index.scss
+
 # misc
+/.env
 .DS_Store
 .env.local
 .env.development.local
