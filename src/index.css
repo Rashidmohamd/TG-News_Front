@@ -99,7 +99,7 @@ html {
 .Lhead {
   font-size: 2rem;
   font-weight: 300;
-  font-family: arial;
+  font-family: serif;
 }
 
 .ghead {
@@ -333,6 +333,7 @@ html {
 .navBar .navContainer .logo {
   display: flex;
   align-items: flex-end;
+  text-decoration: none;
 }
 
 .navBar .navContainer .logo a {

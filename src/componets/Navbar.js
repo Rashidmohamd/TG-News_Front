@@ -23,10 +23,10 @@ const Navbar = () => {
     return ( 
         <div className="navBar">
             <div className="navContainer">
-                {!user && <div className="outLogo logo">
+                {!user && <Link to='/help' className="outLogo logo">
                     <img src="./news-123.jpg" alt="outer logo img" />
                     <h1 className="Lhead logoDet">TG-News</h1>
-                </div>}
+                </Link>}
                 {user && <div className="innerLogo logo">
                     <Link to={`/user-profile/${user._id}`} className="innerLogo logo">
                         <img src={`data:${user.picture.contentType};base64,${user.picture.img}`} alt="innerlogo" />
