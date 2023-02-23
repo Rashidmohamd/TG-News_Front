@@ -17,8 +17,7 @@
 /src/index.scss
 
 # misc
-/.env
-.env
+
 .DS_Store
 .env.local
 .env.development.local
