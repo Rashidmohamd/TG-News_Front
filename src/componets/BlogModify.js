@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import useLogin from "../hooks/useLogin";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
 const BlogModify = () => {
     const { id } = useParams();
     const { data ,setData } = useFetch()
@@ -47,7 +45,7 @@ const BlogModify = () => {
                 <div className="head"><label className="img" htmlFor="file"> {dat.img && <img id="img" src={`data:${dat.img.contentType};base64,${dat.img.data}`}
                     alt="blog hero" />
                 }
-                    {!dat.img && <img id="img" src="/gallary.png"/>}
+                    {!dat.img && <img id="img" alt="altetnativimg" src="/gallary.png"/>}
                 </label>
                 <input type="file" name="image" id="file" className="hide" onChange={() => {
                      const img = document.getElementById('img');

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
-import useUpdate from "../hooks/useUpdate";
 const Myblogs = () => {
     const { id } = useParams()
     const { Url, user } = useLogin();

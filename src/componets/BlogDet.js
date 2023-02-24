@@ -1,7 +1,6 @@
 import { useEffect,  useState } from "react";
 import { useParams } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
-import useUpdate from "../hooks/useUpdate";
 import { formatDistanceToNowStrict } from "date-fns/esm";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
