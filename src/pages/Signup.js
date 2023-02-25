@@ -60,7 +60,8 @@ const Signup = () => {
         console.log(json)
         if (res.status === 201 || res.status === 200) {
             setErr(null)
-            localStorage.setItem("signTkn",json.token)
+            localStorage.setItem("signTkn", json.token)
+            localStorage.setItem("signTime", new Date());
             setSignTkn(json.token);
             setMsg(json.msg)
             navigate('/verification');

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
@@ -42,13 +42,17 @@ const Login = () => {
             method: "POST",
         });
         const json = await res.json();
-        console.log(json);
         if (res.status === 200 || res.status === 201) {
             localStorage.setItem("signTkn", json.token);
+            localStorage.setItem("signTime", new Date());
             setSignTkn(json.token)
             setMsg(json.msg)
         }
     }
+    // useEffect(() => {
+    //     localStorage.setItem("signTkn", 'hello try sign up token')
+    //     localStorage.setItem("signTime", new Date());
+    // },[])
     return ( 
         <div className="signUpForm">
             <form >
@@ -62,6 +66,7 @@ const Login = () => {
                     <button className="btn blueBtn" onClick={login}>Log-In</button>
                     <button className="btn redBtn" onClick={cancele}>Cancel</button>
                 </div>
+                
                 <Link to='/sign-up' className="shead">Do not have account ? <span>Sign-Up</span></Link>
             </form>
         </div>

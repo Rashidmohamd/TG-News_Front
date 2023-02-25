@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEdit,faTrash,faFileUpload,faHeart,faAdd} from '@fortawesome/free-solid-svg-icons'
 import useLike from "./useLikes";
 
-
-
 const Blog = () => {
     const { user, users,Url ,count,setCount} = useLogin();
     const { data, err, laoding,end, setData } = useFetch();
@@ -94,7 +92,8 @@ const Blog = () => {
         console.log(json)
         if (res.status === 200) {
             setData({ type: "removed-one", paylaod: json });
-        }}
+        }
+    }
     return ( 
         <div className="blogs" >
             {err && <h1 className="shead rhead">{err}</h1>}

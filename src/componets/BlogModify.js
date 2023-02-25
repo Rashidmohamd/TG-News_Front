@@ -20,7 +20,7 @@ const BlogModify = () => {
     }
     const modify = async (e) => {
         e.preventDefault();
-        const image = document.getElementById("file")
+        const image = document.getElementById("file").files[0];
         const formData = new FormData();
         if (articale) formData.append('articale', JSON.stringify(articale));
         if (image) formData.append("image", image);

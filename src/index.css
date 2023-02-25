@@ -13,7 +13,6 @@ html {
   text-decoration: none;
   font-size: 1.8rem;
   font-family: arial;
-  font-weight: 200;
   padding: .25rem .2rem;
   margin: 0 5px;
   transition: all .5s linear;
@@ -69,7 +68,7 @@ html {
 
 .shead {
   font-size: 1.8rem;
-  font-weight: 300;
+  font-weight: 500;
   font-family: arial;
 }
 
@@ -98,7 +97,7 @@ html {
 
 .Lhead {
   font-size: 2rem;
-  font-weight: 300;
+  font-weight: 600;
   font-family: serif;
 }
 
@@ -116,7 +115,6 @@ html {
 
 .mtext {
   font-size: 1.5rem;
-  font-weight: 100;
   letter-spacing: .1rem;
   font-family: arial;
 }
@@ -137,7 +135,6 @@ html {
 
 .xstext {
   font-size: 1.2rem;
-  font-weight: 100;
   font-family: arial;
 }
 

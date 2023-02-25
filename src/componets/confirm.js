@@ -28,11 +28,47 @@ const Verify = () => {
             console.log(json)
         }
     }
-    const Canceled = (e) => {
+    const Canceled = async(e) => {
         e.preventDefault();
-        console.log(typeof(parseInt(verifyCode)))
+        localStorage.removeItem('signTkn');
+        localStorage.removeItem('signTime')
         setVerify('')
+        setSignTkn(null)
+        const res = await fetch(`${Url}/delete-unactive`, {
+            method: "DELETE",
+            headers:{"authorization":`Bearer ${signTkn}`}
+        })
+        const json = await res.json();
+        console.log(json)
     }
+    const resendCode = async (e) => {
+        e.preventDefault();
+        const res = await fetch(`${Url}/resend-password`, {
+            headers: { "authorization":`Bearer ${signTkn}` },
+        });
+        const json = await res.json();
+        if (res.status === 200 || res.status === 201) {
+            setMsg(json.msg)
+            const note = document.querySelector("greenNote");
+            note.classList.add('yellowNote');
+            note.classList.remove('greenNote')
+        }
+    }
+    setInterval(() => {
+        const now = new Date();
+        const nowToMilli = now.getTime();
+        const signTime = localStorage.getItem("signTime");
+        if (signTime) {
+            const signToMi = new Date(signTime);
+            const signToMilli = signToMi.getTime();
+            const remain = nowToMilli - signToMilli;
+            if (remain >= 6700000) {
+                localStorage.removeItem('signTime');
+                localStorage.removeItem('signTkn');
+            }
+        }
+
+    }, 300000);
     return ( 
         <div className="signUpForm">
             <form >
@@ -42,8 +78,10 @@ const Verify = () => {
                 <input type="number" name="code" value={verifyCode} onChange={e=>setVerify(e.target.value)} placeholder="Enter Verify Code" />
                 <div className="btns">
                     <button className="btn blueBtn" onClick={verify}>Verify</button>
+                    <button className="btn greenBtn" onClick={resendCode}>resend</button>
                     <button className="btn redBtn" onClick={Canceled}>Concel</button>
                 </div>
+                
              </form>
         </div>
      );
