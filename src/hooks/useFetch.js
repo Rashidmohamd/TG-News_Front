@@ -7,9 +7,9 @@ const useFetch = () => {
     const [err, setErr] = useState(null);
     const [laoding, setLaoding] = useState(false);
     const { setData, data } = useUpdate();
-    const [end,setEnd]=useState(null)
-    let run = users ? true : false;
+    const [end, setEnd] = useState(null)
     useEffect(() => {
+        console.log('hello')
         const fetching = async () => {
             const res = await fetch(`${Url}/articales?Block=${count|| 0}`, {
                 headers: {
@@ -30,7 +30,7 @@ const useFetch = () => {
             }
             
         }
-        if (user && users) {
+        
             if (!data) {
                 fetching().catch((err) => {
                     if (err.message === 'Failed to fetch') {
@@ -39,7 +39,8 @@ const useFetch = () => {
                     }
                     setLaoding(false);
                 });
-            } else if (data && data.length/3=== count) {
+            } else if (data && count > data.length / 3 ) {
+                console.log(count)
                 fetching().catch((err) => {
                     if (err.message === 'Failed to fetch') {
                         setErr(err.message);
@@ -48,7 +49,7 @@ const useFetch = () => {
                     setLaoding(false);
                 });
             }
-        }
+        
         if (!data) {
             setLaoding(true)
         } else {
@@ -56,8 +57,8 @@ const useFetch = () => {
             setErr(null)
         }
         
-    }, [run,count]);
-    return { data ,err,end, laoding ,setData};
+    }, []);
+    return { data ,err,end, laoding ,setData}
 }
  
 export default useFetch;

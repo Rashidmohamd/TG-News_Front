@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import { Link} from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 import {formatDistanceToNowStrict} from 'date-fns'
@@ -94,13 +94,13 @@ const Blog = () => {
             setData({ type: "removed-one", paylaod: json });
         }
     }
+    
     return ( 
         <div className="blogs" >
             {err && <h1 className="shead rhead">{err}</h1>}
             {laoding && <h1 className="shead ghead">please wait laoding ...</h1>}
-   
             {/* bolg section */}
-            {data && data.map(dat => {
+            {data ?data.map(dat => {
                 return <div className="blog" key={dat._id}>
                     <div className="publisher">
 
@@ -127,13 +127,13 @@ const Blog = () => {
                         
                         <button className="modifyBtn delete" onClick={e => {
                             e.preventDefault()
-                            deleteArticale().catch(err=>setErr(err.message))
+                            deleteArticale(dat._id).catch(err=>setErr(err.message))
                         }}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>
                         <Link to={`/blog-modify/${dat._id}`}>
                         <button className="edit modifyBtn "><FontAwesomeIcon icon={faEdit}></FontAwesomeIcon></button></Link>
                     </div></div>}
                 </div>
-            })}
+            }):''}
 
       {/* input section  */}
           
@@ -156,10 +156,10 @@ const Blog = () => {
                     <button className="formBtn send" onClick={publish}><FontAwesomeIcon icon={faFileUpload}></FontAwesomeIcon></button>
                 </form>
             </div>
-           {!laoding&& !end? <button onClick={(e) => {
+           {!laoding&& !end &&users && <button onClick={(e) => {
                 e.preventDefault();
                 setCount(count+1)
-            }} className="btn blueBtn">Click For More ...</button>:''}
+            }} className="btn blueBtn">Click For More ...</button>}
         </div>
      );
 }

@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@200;300;400&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Noto+Sans+Arabic:wght@200;300;400&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@1,400;1,500&family=Noto+Sans+Arabic:wght@200;300;400&family=Pacifico&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +15,7 @@ html {
 .btn {
   text-decoration: none;
   font-size: 1.8rem;
-  font-family: arial;
+  font-family: "IBM Plex Sans", sans-serif;
   padding: .25rem .2rem;
   margin: 0 5px;
   transition: all .5s linear;
@@ -50,7 +53,7 @@ html {
 .navLink {
   transition: all .5s linear;
   font-size: 1.8rem;
-  font-family: arial;
+  font-family: "IBM Plex Sans", sans-serif;
   text-decoration: none;
   color: #0076ff;
   display: inline-block;
@@ -67,9 +70,9 @@ html {
 }
 
 .shead {
-  font-size: 1.8rem;
-  font-weight: 500;
-  font-family: arial;
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: "Dancing Script", cursive;
 }
 
 .note {
@@ -98,7 +101,7 @@ html {
 .Lhead {
   font-size: 2rem;
   font-weight: 600;
-  font-family: serif;
+  font-family: "Pacifico", cursive;
 }
 
 .ghead {
@@ -116,7 +119,7 @@ html {
 .mtext {
   font-size: 1.5rem;
   letter-spacing: .1rem;
-  font-family: arial;
+  font-family: "IBM Plex Sans", sans-serif;
 }
 
 .dtext {
@@ -129,13 +132,13 @@ html {
 
 .xshead {
   font-size: 1.6rem;
-  font-family: arial;
+  font-family: "IBM Plex Sans", sans-serif;
   font-weight: 300;
 }
 
 .xstext {
   font-size: 1.2rem;
-  font-family: arial;
+  font-family: "IBM Plex Sans", sans-serif;
 }
 
 .inputSect {
@@ -335,6 +338,7 @@ html {
 
 .navBar .navContainer .logo a {
   text-decoration: none;
+  font-family: "Pacifico", cursive;
 }
 
 .navBar .navContainer .logo img {

@@ -57,7 +57,6 @@ const Signup = () => {
             body: formdat
         });
         const json = await res.json();
-        console.log(json)
         if (res.status === 201 || res.status === 200) {
             setErr(null)
             localStorage.setItem("signTkn", json.token)

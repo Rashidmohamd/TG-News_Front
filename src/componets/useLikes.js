@@ -5,7 +5,7 @@ const likeReducer = (state, action) => {
         case "set-likes":
             return { likes: action.paylaod };
         case "add-like":
-            return state.likes ?{ likes: [action.paylaod,...state.likes] }:{likes:action.paylaod};
+            return state.likes ? { likes: [action.paylaod, ...state.likes] } : { likes:[ action.paylaod] };
         case 'delete-like':
             return { likes: state.likes.filter(l=>l._id!==action.paylaod._id) };
         default:

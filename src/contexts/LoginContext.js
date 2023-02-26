@@ -21,14 +21,16 @@ export const LoginContextProvider = ({ children }) => {
     const [users, setUsers] = useState(null)
     const [signTkn, setSignTkn] = useState(null)
     const [msg, setMsg] = useState('');
-    const [count,setCount]=useState(0)
-    const Url = 'https://tg-news-4n34.onrender.com/TG-news';
+    const [count, setCount] = useState(0);
+    const [fire, setFire] = useState(false);
+    // const Url = 'https://tg-news-4n34.onrender.com/TG-news';
+    const Url = 'http://localhost:8000/TG-news';
     useEffect(() => {
-
         const token = localStorage.getItem("user");
         const tkn = localStorage.getItem("signTkn");
       
         if (tkn) setSignTkn(tkn);
+        console.log(token)
         if (!token) return
         
            const parsedTkn = JSON.parse(token)
@@ -39,14 +41,14 @@ export const LoginContextProvider = ({ children }) => {
                 })
 
                 const json = await res.json()
+                console.log(json)
                 if (res.status === 200) setUsers(json);
             
             }
             feting();
-        
-    }, [setUser,Url]);
+    }, [fire,Url]);
     return (
-        <LoginContext.Provider value={{...user,setSignTkn,count,setCount,signTkn,msg,users,setMsg,setUser,Url}}>
+        <LoginContext.Provider value={{...user,setSignTkn,count,setCount,signTkn,msg,users,setMsg,setUser,setFire,Url}}>
             {children}
         </LoginContext.Provider>
     )

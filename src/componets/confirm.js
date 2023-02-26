@@ -66,6 +66,9 @@ const Verify = () => {
                 localStorage.removeItem('signTime');
                 localStorage.removeItem('signTkn');
             }
+        }else if(!signTime && signTkn){
+            localStorage.removeItem('signTkn');
+            setSignTkn(null);
         }
 
     }, 300000);

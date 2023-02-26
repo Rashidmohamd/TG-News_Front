@@ -7,9 +7,11 @@ const Login = () => {
     const [password, setPass] = useState('');
     const [email, setEmail] = useState('');
     const [err, setErr] = useState();
-    const { setUser,setMsg,setSignTkn,Url} = useLogin();
+    const [laoding, setlaoding] = useState(false);
+    const { setUser,setMsg,setSignTkn,Url,setFire} = useLogin();
     const login = async (e) => {
         e.preventDefault();
+        setlaoding(true)
         if (!email || !password) {
           setErr("please fill all field to log-in you can not log in without your cradential think twice")
         } else {
@@ -20,11 +22,14 @@ const Login = () => {
         })
         const json = await res.json();
         if (res.status === 200 || res.status===201) {
-            setUser({ type: "set-user", paylaod:  json  })
+            setUser({ type: "set-user", paylaod: json })
+            setFire(true)
             setErr(null)
+            setlaoding(false)
             navigate('/');
         } else {
             setErr(json.error);
+            setlaoding(false)
         }
       }
     }
@@ -49,10 +54,6 @@ const Login = () => {
             setMsg(json.msg)
         }
     }
-    // useEffect(() => {
-    //     localStorage.setItem("signTkn", 'hello try sign up token')
-    //     localStorage.setItem("signTime", new Date());
-    // },[])
     return ( 
         <div className="signUpForm">
             <form >
@@ -63,7 +64,7 @@ const Login = () => {
                 <input type="password" value={password} onChange={(e) => setPass(e.target.value)} />
                 <h1 className="shead ghead forget" onClick={fortgotPassword}>Forgot password ? <span>Click here</span></h1>
                 <div className="btns">
-                    <button className="btn blueBtn" onClick={login}>Log-In</button>
+                    <button className="btn blueBtn"  onClick={login}>Log-In</button>
                     <button className="btn redBtn" onClick={cancele}>Cancel</button>
                 </div>
                 
