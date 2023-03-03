@@ -24,7 +24,7 @@ const useLike = () => {
             const json = await res.json();
             if(res.status===200)setLike({type:'set-likes',paylaod:json})
         }
-        fet().catch(err=>console.log(err.message))
+        fet().catch()
     }, [Url,user])
     return {...like,setLike};
 }

@@ -23,14 +23,12 @@ export const LoginContextProvider = ({ children }) => {
     const [msg, setMsg] = useState('');
     const [count, setCount] = useState(0);
     const [fire, setFire] = useState(false);
-    // const Url = 'https://tg-news-4n34.onrender.com/TG-news';
-    const Url = 'http://localhost:8000/TG-news';
+    const Url = process.env.REACT_APP_URI;
     useEffect(() => {
         const token = localStorage.getItem("user");
         const tkn = localStorage.getItem("signTkn");
       
         if (tkn) setSignTkn(tkn);
-        console.log(token)
         if (!token) return
         
            const parsedTkn = JSON.parse(token)
@@ -39,13 +37,11 @@ export const LoginContextProvider = ({ children }) => {
                 const res = await fetch(`${Url}/users`, {
                     headers: { "authorization": `Bearer ${parsedTkn.token}` }
                 })
-
                 const json = await res.json()
-                console.log(json)
                 if (res.status === 200) setUsers(json);
             
             }
-            feting();
+            feting().catch();
     }, [fire,Url]);
     return (
         <LoginContext.Provider value={{...user,setSignTkn,count,setCount,signTkn,msg,users,setMsg,setUser,setFire,Url}}>

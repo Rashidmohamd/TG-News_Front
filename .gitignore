@@ -17,7 +17,7 @@
 /src/index.scss
 
 # misc
-
+src/note.txt
 .DS_Store
 .env.local
 .env.development.local

@@ -14,6 +14,7 @@ const ModifyProfule = () => {
     const [age, setAge] = useState(0);
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
+    const [err,setErr]=useState(null)
     useEffect(() => {
         if (user._id === id) {
             setFirstName(user.firstName);
@@ -47,18 +48,24 @@ const ModifyProfule = () => {
                 console.log("success !")
                 setUser({ type: "set-user", action: json });
             } else {
-                 console.log(json);
+                setErr(json.error)
             }
            
         } else {
-            console.log('sorry you can leave an empty field')
+            setErr('sorry you can leave an empty field')
         }
 
     }
     return ( 
         <div className="modify-profile">
+            {err && <h1 className="rhead xshead">{err}</h1>}
             {user._id === id && <form className="form" encType="multipart/form-data">
-               <div className="head"> <label htmlFor="picture"><img id="img" src={`data:${user.picture.contentType};base64,${user.picture.img}`} alt="" /></label>
+                <div className="head">
+                    <label htmlFor="picture">
+                        {user.picture.img && <img id="img" src={`data:${user.picture.contentType};base64,${user.picture.img}`} alt="user profile pic" />}
+                        {!user.picture.img && <img id="img" src="/profile.jpg" alt="user alternive pic" />}
+                        
+                    </label>
                 <input type="file" className="hide" name="picture" id="picture" onChange={e => {
                     const imgFiel = document.getElementById('img')
                     const img = e.target.files[0];

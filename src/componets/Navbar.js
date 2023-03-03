@@ -20,6 +20,7 @@ const Navbar = () => {
             nav.classList.add('hideNav');
         }
     }
+    console.log(user)
     return ( 
         <div className="navBar">
             <div className="navContainer">
@@ -29,7 +30,8 @@ const Navbar = () => {
                 </Link>}
                 {user && <div className="innerLogo logo">
                     <Link to={`/user-profile/${user._id}`} className="innerLogo logo">
-                        <img src={`data:${user.picture.contentType};base64,${user.picture.img}`} alt="innerlogo" />
+                        {user.picture.img && <img src={`data:${user.picture.contentType};base64,${user.picture.img}`} alt="innerlogo" />}
+                        {!user.picture.img && <img src="/profile.jpg" alt="alternive user profile pic"/>}
                         <div className="logoDet"><h1 className="shead rhead ">{user.firstName}</h1>
                             <small>Joined {formatDistanceToNowStrict(new Date(user.createdAt))}</small>
                         </div>

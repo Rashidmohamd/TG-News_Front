@@ -4,9 +4,8 @@ export const DataContext = createContext();
 const reducerFunc = (state, action) => {
     switch (action.type) {
         case "adding-new-data":
-            return state.data ? { data: [action.paylaod, ...state.data] } : { data: action.paylaod}
+            return state.data ? { data: [action.paylaod, ...state.data] } : { data: [ action.paylaod ] }
         case "removed-one":
-            console.log(state.data)
             return state.data.length>1?{ data: state.data.filter(dat => dat._id !== action.paylaod._id) }:{data:null};
         case 'update-data':
             return { data: [action.paylaod, ...state.data.filter(dat => dat._id !== action.paylaod._id)] };

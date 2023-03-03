@@ -9,7 +9,9 @@ const Profile = () => {
         <div className="profile">
             <div className="container">
                 {users.map(u => u._id === id ? <div key={u._id}>
-                    <div className="headPart" ><img src={`data:${u.picture.contentType};base64,${u.picture.img}`} alt="profile p" />
+                    <div className="headPart" >
+                        {u.picture && <img src={`data:${u.picture.contentType};base64,${u.picture.img}`} alt="profile p" />}
+                        {!u.picture && <img src="/profile.jpg" alt="user alternive pi"/>}
                         <Link className="shead ghead li" to={ `/my-blogs/${u._id}`}>My-Blogs</Link></div>
                     
                     <h1 className="field ">First Name <span>{u.firstName}</span></h1>

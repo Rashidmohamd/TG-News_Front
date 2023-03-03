@@ -9,7 +9,6 @@ const useFetch = () => {
     const { setData, data } = useUpdate();
     const [end, setEnd] = useState(null)
     useEffect(() => {
-        console.log('hello')
         const fetching = async () => {
             const res = await fetch(`${Url}/articales?Block=${count|| 0}`, {
                 headers: {
@@ -40,7 +39,6 @@ const useFetch = () => {
                     setLaoding(false);
                 });
             } else if (data && count > data.length / 3 ) {
-                console.log(count)
                 fetching().catch((err) => {
                     if (err.message === 'Failed to fetch') {
                         setErr(err.message);
@@ -50,14 +48,14 @@ const useFetch = () => {
                 });
             }
         
-        if (!data) {
+        if (!data || !users ) {
             setLaoding(true)
         } else {
             setLaoding(false)
             setErr(null)
         }
         
-    }, []);
+    }, [count]);
     return { data ,err,end, laoding ,setData}
 }
  

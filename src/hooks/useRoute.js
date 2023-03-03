@@ -17,6 +17,7 @@ import CommentModigy from "../componets/commentModify";
 import ResetPassword from "../componets/resetPassword";
 import About from "../componets/about";
 import Usage from "../componets/usage";
+import Notfound from "../componets/notFound";
 
 const useRoute = () => {
     const { user,signTkn } = useLogin()
@@ -40,6 +41,7 @@ const useRoute = () => {
                  <Route index element={<About />} />
                  <Route path="usage" element={<Usage/>} />
              </Route>
+             <Route path="*" element={<Notfound/>} />
          </Route>
         )
     )

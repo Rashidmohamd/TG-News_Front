@@ -1,5 +1,5 @@
 import { useEffect,  useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 import { formatDistanceToNowStrict } from "date-fns/esm";
 import { Link } from "react-router-dom";
@@ -21,6 +21,7 @@ const BlogDet = () => {
     const comms = coms.coms
     const like = likes
     const [err, setErr] = useState(null)
+    const goBack =useNavigate()
     useEffect(() => {
         const fetchComment = async () => {
             const dat = await fetch(`${Url}/get-comments/${id}`, {
@@ -65,11 +66,11 @@ const BlogDet = () => {
 
         fetchLikes().catch(err => {
             if (err.message === 'Failed to fetch') {
-                console.log('please check your internet connection ...')
+                setError('please check your internet connection ...')
             }
         })
         fetchComment().catch(err => {
-            if(err.message==="Failed to fetch")console.log("please check your internet connection ")
+            if(err.message==="Failed to fetch")setError("please check your internet connection ")
         })
 
     },[])
@@ -79,11 +80,10 @@ const BlogDet = () => {
         const f = document.querySelector(".tag");
         const t = document.querySelector(".textInput");
         
-       if (f.classList.contains("show")) {
-           f.classList.remove('show')
+       if (t.classList.contains("open")) {
+           togl.classList.add('edit')
            t.classList.remove('open')
            togl.classList.remove('delete')
-           togl.classList.add('edit')
            setComment('')
            setErr(null)
        } else {
@@ -96,6 +96,7 @@ const BlogDet = () => {
     }
     const commenting = async (e) => {
         e.preventDefault();
+        const togl = document.querySelector('.toggle')
         const t = document.querySelector(".textInput");
         const res = await fetch(`${Url}/add-comment/${id}`, {
             method: "POST",
@@ -106,6 +107,8 @@ const BlogDet = () => {
         if (res.status === 201) {
             setComs({ type: "adding-comment", paylaod: json })
             t.classList.remove('open');
+            togl.classList.remove('delete')
+            togl.classList.add('edit')
             setComment('')
         } else {
             setErr(json.error)
@@ -121,7 +124,7 @@ const BlogDet = () => {
         if (res.status === 200) {
             setComs({type:"delete-comment",paylaod:json})
         } else {
-            console.log(json)
+            setError(json.error)
         }
     }
     const loving = async (id) => {
@@ -140,6 +143,18 @@ const BlogDet = () => {
         }
         
     }
+    const removeArticle = async (e) => {
+        e.preventDefault();
+        const res = await fetch(`${Url}/delete-articale/${id}`, {
+            method: "DELETE",
+            headers:{"authorization":`Bearer ${user.token}`}
+        })
+        goBack('/')
+        const json = await res.json();
+        if (res.status === 200) {
+            setData({ type: "removed-one", paylaod: json });
+        }
+    }
     return (<div className="blogDet">
         {loading && <h1 className="shead bhead">Please wait Loading ...</h1>}
         {error && <h1 className="shead rhead">{ error}</h1>}
@@ -148,8 +163,9 @@ const BlogDet = () => {
                 < div key={data._id} className="blog" >
                     <div className="publisher">
                         {users && users.map(u => u._id === data.userId ? <Link key={u._id} to={`/user-profile/${data.userId}`}>
-                            {u.picture && <img src={`data:${u.picture.contentType};base64,${u.picture.img}`} alt="if found" />}
-                            {!u.picture && <img src="/img9.jpg" alt="other wise" />}
+                            {u.picture &&
+                                <img src={`data:${u.picture.contentType};base64,${u.picture.img}`} alt="if found" />}
+                            {!u.picture && <img src="/profile.jpg" alt="user alternive pi"/>}
                             <div className="div">
                                 <h1 id="id" className="name">{u._id === data.userId ? u.firstName + " " + u.lastName : ''}</h1>
                                 <div className="time">Published {formatDistanceToNowStrict(new Date(data.createdAt), { addSuffix: true })}</div>
@@ -170,7 +186,7 @@ const BlogDet = () => {
                     </div>
 
                     {user._id===data.userId&&<div className="moBtnContainer"><div className="mBtns">
-                        <button className="modifyBtn delete"><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon> </button>
+                        <button className="modifyBtn delete" onClick={removeArticle}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon> </button>
                        <Link to={`/blog-modify/${id}`}> <button className="edit modifyBtn "><FontAwesomeIcon icon={faEdit}></FontAwesomeIcon></button></Link>
                     </div></div>}
                 </div>
@@ -192,7 +208,8 @@ const BlogDet = () => {
             return <div key={d._id} className="blogComLik">
                 {comms && <div className="comments">{comms.map(com => com.articaleId===d._id? <aside className="comment" key={com._id}>
                         {users && users.map(u => u._id === com.userId ? <Link to={`/user-profile/${com.userId}`} className='owner' key={u._id}>
-                            <img className="sImg" src={`data:${u.picture.contentType};base64,${u.picture.img}`} alt="" />
+                            {u.picture && <img className="sImg" src={`data:${u.picture.contentType};base64,${u.picture.img}`} alt="user profile pic" />}
+                            {!u.picture && <img className="sImg" src="/profile.jpg" alt="user alternive pic"/>}
                             <div className="ownerDet">
                                 <h1 className="xshead bhead">{u.firstName + '' + u.lastName}</h1>
                                 <small>{formatDistanceToNowStrict(new Date(com.createdAt), { addSuffix: true })}</small>
@@ -210,8 +227,9 @@ const BlogDet = () => {
                 </div>}
                 {like && <div className="likes">{like.map(l => l.articaleId === d._id ? <div className="like" key={l._id}>
                     {users && users.map(u => u._id === l.userId && l.articaleId === id ? <Link to={`/user-profile/${l.userId}`} key={l._id}>
-                        <FontAwesomeIcon style={{color:"red",fontSize:15}} icon={faHeart}></FontAwesomeIcon>
-                        <img className="sImg" src={`data:${u.picture.contentType};base64,${u.picture.img}`} alt="" />
+                        <FontAwesomeIcon style={{color:"red",fontSize:15}} icon={faHeart} ></FontAwesomeIcon>
+                        {u.picture && <img className="sImg" src={`data:${u.picture.contentType};base64,${u.picture.img}`} alt="user profile pic" />}
+                        {!u.picture && <img className="sImg" src="/profile.jpg" alt="user alternive pic"/>}
                     </Link>
                         :null)}
                     

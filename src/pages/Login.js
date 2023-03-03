@@ -13,7 +13,8 @@ const Login = () => {
         e.preventDefault();
         setlaoding(true)
         if (!email || !password) {
-          setErr("please fill all field to log-in you can not log in without your cradential think twice")
+            setErr("please fill all field to log-in you can not log in without your cradential think twice")
+            return;
         } else {
         const res = await fetch(`${Url}/log-in`, {
             method: "POST",

@@ -1,4 +1,4 @@
-import {  useEffect, useState } from "react";
+import {  useState } from "react";
 import { Link} from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 import {formatDistanceToNowStrict} from 'date-fns'
@@ -89,7 +89,6 @@ const Blog = () => {
             headers:{"authorization":`Bearer ${user.token}`}
         })
         const json = await res.json();
-        console.log(json)
         if (res.status === 200) {
             setData({ type: "removed-one", paylaod: json });
         }
@@ -99,14 +98,15 @@ const Blog = () => {
         <div className="blogs" >
             {err && <h1 className="shead rhead">{err}</h1>}
             {laoding && <h1 className="shead ghead">please wait laoding ...</h1>}
+            {!err && !data && !laoding && <h1 className="shead bhead">sorry nothing to show but you can be first one who can publish you cam try it</h1>}
             {/* bolg section */}
-            {data ?data.map(dat => {
+            {users && data ?data.map(dat => {
                 return <div className="blog" key={dat._id}>
                     <div className="publisher">
 
                         {users &&  users.map(u => u._id === dat.userId ? <Link key={u._id} to={`user-profile/${dat.userId}`}>
                             {u.picture && <img src={`data:${u.picture.contentType};base64,${u.picture.img}`} alt="if found" />}
-                            {!u.picture && <img src="/img9.jpg" alt="other wise" />}
+                            {!u.picture && <img src="/profile.jpg" alt="user alternive pic"/>}
                             <div className="div">
                                 <h1 id="id" className="name">{ u.firstName + " " + u.lastName}</h1>
                                 <div className="time">Published {formatDistanceToNowStrict(new Date(dat.createdAt), { addSuffix: true })}</div>
@@ -156,10 +156,10 @@ const Blog = () => {
                     <button className="formBtn send" onClick={publish}><FontAwesomeIcon icon={faFileUpload}></FontAwesomeIcon></button>
                 </form>
             </div>
-           {!laoding&& !end &&users && <button onClick={(e) => {
+           {!end && !laoding && users ?<button onClick={(e) => {
                 e.preventDefault();
                 setCount(count+1)
-            }} className="btn blueBtn">Click For More ...</button>}
+            }} className="btn blueBtn">Click For More ...</button>:''}
         </div>
      );
 }

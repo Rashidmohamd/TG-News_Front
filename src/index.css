@@ -154,14 +154,14 @@ html {
 }
 
 .inputSect .inputBtn {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   text-align: center;
   font-size: bold;
   border-radius: 50%;
   position: absolute;
-  right: -20px;
-  top: -7px;
+  right: -30px;
+  top: -15px;
   z-index: 100;
   cursor: pointer;
 }
@@ -193,10 +193,10 @@ html {
 }
 
 .inputSect .form .formBtn {
-  right: -20px;
-  bottom: 0;
-  width: 20px;
-  height: 20px;
+  right: -30px;
+  bottom: -3px;
+  width: 30px;
+  height: 30px;
   text-align: center;
   font-size: bold;
   border-radius: 50%;
@@ -282,16 +282,16 @@ html {
 
 .edit {
   color: #1aac83;
-  border: 0.5px solid #1aac83;
+  border: 1px solid #1aac83;
 }
 
 .delete {
   color: #e7195a;
-  border: 0.5px solid #e7195a;
+  border: 1px solid #e7195a;
 }
 
 .send {
-  border: 0.5px solid #0076ff;
+  border: 1px solid #0076ff;
   color: #0076ff;
 }
 
@@ -709,7 +709,7 @@ html {
 }
 
 .help .body .xshead {
-  margin: 10px;
+  margin-bottom: 5px;
 }
 
 .help .body .help-blog-container {
@@ -727,6 +727,111 @@ html {
 
 .help .body .help-blog-container p {
   padding: 5px;
+}
+
+.help .about .showCase {
+  width: 100%;
+  height: 40vh;
+  position: relative;
+  border-right: solid 2px #0076ff;
+  border-bottom: solid 2px #0076ff;
+  border-bottom-right-radius: 30px;
+  margin-bottom: 2.5rem;
+  background-image: url("../public/tgnews.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.help .about .showCase img {
+  width: 30%;
+  border-top-right-radius: 20px;
+  border-top: solid 2px #0076ff;
+  border-right: solid 2px #0076ff;
+  position: absolute;
+  bottom: -20px;
+  right: 5%;
+  transition: all .4s linear;
+}
+
+.help .about .showCase img:hover {
+  width: 80%;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.help .about .help-blog {
+  display: flex;
+  flex-direction: column;
+}
+
+.help .about .help-blog .helpB {
+  margin: 10px 0;
+}
+
+.help .about footer {
+  width: 100%;
+  height: 10vh;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.help .about footer .footerContainer {
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+}
+
+.help .about footer .footerContainer::after {
+  content: '';
+  width: 40px;
+  height: 3px;
+  background-color: #4ef9d6ff;
+  position: absolute;
+  right: -43px;
+  top: 50%;
+}
+
+.help .about footer .footerContainer::before {
+  content: '';
+  width: 40px;
+  height: 3px;
+  background: #4ef9d6ff;
+  position: absolute;
+  top: 50%;
+  left: -43px;
+}
+
+.help .usage .useageContainer {
+  background: rgba(240, 248, 240, 0.3);
+  padding: 10px;
+}
+
+.help .usage .useageBlog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  background: rgba(240, 248, 240, 0.4);
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+
+.help .usage .useageBlog h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.help .usage .useageBlog img {
+  margin: 5px 0;
+  padding: 0;
+  width: 95%;
+  border-radius: 20px;
 }
 
 .blogComLik {
@@ -818,15 +923,15 @@ html {
 }
 
 .profile .container img {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
+  width: 270px;
+  height: 270px;
+  border-radius: 10px;
   box-shadow: 0 0 3px white;
   transition: all .4s linear;
 }
 
 .profile .container img:hover {
-  transform: scale(1.6);
+  transform: scale(1.2);
   border-radius: 5px;
 }
 
@@ -965,13 +1070,18 @@ html {
 
 .blog-modify form .head img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: 100%;
   cursor: pointer;
 }
 
 .blog-modify form .head label {
   position: relative;
+}
+
+.blog-modify form .head .imgCon {
+  width: 100%;
+  height: 30vh;
+  background: #f4f5f5;
 }
 
 .blog-modify form .head label::after {
@@ -1048,8 +1158,8 @@ html {
 }
 
 .modify-profile form img {
-  width: 150px;
-  height: 150px;
+  width: 300px;
+  height: 300px;
   border-radius: 30%;
 }
 
@@ -1105,6 +1215,16 @@ html {
   .help .help-nav {
     width: 90%;
     margin: 10px auto;
+  }
+}
+
+@media screen and (max-width: 581px) {
+  .help .container {
+    width: 100%;
+  }
+  .help .help-nav {
+    width: 99%;
+    left: .4%;
   }
 }
 

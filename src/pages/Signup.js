@@ -31,13 +31,16 @@ const Signup = () => {
     }
     const signup = async (e) => {
         e.preventDefault();
+        setErr(null);
         const pfp = document.querySelector('#pfp').files[0];
         console.log(pfp)
         if (!firstName || !lastName || !email || !password || !country || !age || !gender || !nationality || !ConPass) {
-            setErr("sorry all fied must e filled")
+            setErr("sorry all fied must be filled to create an account :)")
+            return;
         }
         if (password !== ConPass) {
-            setErr("sorry your confirm password is not matching your password")
+            setErr("sorry your confirm password is not matching your password to make it easy for youself just retype it")
+            return;
         }
         const formdat = new FormData();
         if (pfp) formdat.append("profilePicture", pfp);
@@ -66,7 +69,6 @@ const Signup = () => {
             navigate('/verification');
         }
         else {
-            console.log(json)
             setErr(json.error)
         }     
     }
