@@ -93,7 +93,6 @@ const Blog = () => {
             setData({ type: "removed-one", paylaod: json });
         }
     }
-    
     return ( 
         <div className="blogs" >
             {err && <h1 className="shead rhead">{err}</h1>}

@@ -16,8 +16,10 @@ const Signup = () => {
     const [gender, setGender] = useState("Male");
     const [city, setCity] = useState('')
     const [nationality, setNational] = useState('');
+    const [laoding, setLaoding] = useState(false);
     const cancel = (e) => {
         e.preventDefault();
+        setErr(null)
         setAge(0);
         setConPss('');
         setCountry('Sudan')
@@ -29,17 +31,18 @@ const Signup = () => {
         setPassword('')
        
     }
-    const signup = async (e) => {
-        e.preventDefault();
+    const signup = async () => {
         setErr(null);
+        setLaoding(true);
         const pfp = document.querySelector('#pfp').files[0];
-        console.log(pfp)
         if (!firstName || !lastName || !email || !password || !country || !age || !gender || !nationality || !ConPass) {
             setErr("sorry all fied must be filled to create an account :)")
-            return;
+            setLaoding(false)
+            return ;
         }
         if (password !== ConPass) {
             setErr("sorry your confirm password is not matching your password to make it easy for youself just retype it")
+            setLaoding(false)
             return;
         }
         const formdat = new FormData();
@@ -61,6 +64,7 @@ const Signup = () => {
         });
         const json = await res.json();
         if (res.status === 201 || res.status === 200) {
+            setLaoding(false)
             setErr(null)
             localStorage.setItem("signTkn", json.token)
             localStorage.setItem("signTime", new Date());
@@ -70,9 +74,13 @@ const Signup = () => {
         }
         else {
             setErr(json.error)
+            setLaoding(false)
         }     
     }
-
+    if (laoding) {
+        const disable = document.querySelector('.signBtn');
+        disable.setItem='disabled'
+    }
     return (
         <div className="signUpForm">
             <form action="" encType="multipart/form-data">
@@ -105,7 +113,7 @@ const Signup = () => {
 
                 <div className="sect sect2">
                      <label htmlFor="">Nationality</label>
-                    <input type="text" placeholder="Your Nationaity" value={nationality} onChange={(e)=>setNational(e.target.value)} />
+                    <input  type="text" placeholder="Your Nationaity" value={nationality} onChange={(e)=>setNational(e.target.value)} />
                 </div>
 
                 <div className="sect sect4">
@@ -127,7 +135,13 @@ const Signup = () => {
                 <label>Confirm Password :</label>
                 <input type="password" placeholder="Confirm Password" value={ConPass} onChange={(e)=>setConPss(e.target.value)} />
                 <div className="btns">
-                    <button className="btn blueBtn" onClick={signup}>Sing-up</button><button className="btn redBtn" onClick={cancel}>Cancel</button>
+                    <button className="btn blueBtn signBtn" style={{ backgroundColor: `${laoding ? "rgba(0,0,0,0.5)" : ''}` }} onClick={e => {
+                        e.preventDefault()
+                        signup().catch(err => {
+                            setErr(err.message);
+                            setLaoding(false)
+                        })
+                    }}>{laoding ? "Signing..." : "Sign-Up"}</button><button className="btn redBtn" onClick={cancel}>Cancel</button>
                 </div>
                 {err && <h1 className="err note redNote">{err}</h1>}
                 <Link to='/log-in' className="shead">have account ? <span>Log-In</span></Link>
