@@ -1165,7 +1165,7 @@ html {
 
 .modify-profile form input, .modify-profile form label {
   font-size: 1.5rem;
-  font-weight: 200;
+  font-family: "IBM Plex Sans", sans-serif;
   color: #121212;
   text-transform: capitalize;
 }

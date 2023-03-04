@@ -20,7 +20,6 @@ const Navbar = () => {
             nav.classList.add('hideNav');
         }
     }
-    console.log(user)
     return ( 
         <div className="navBar">
             <div className="navContainer">

@@ -99,7 +99,7 @@ const Blog = () => {
             {laoding && <h1 className="shead ghead">please wait laoding ...</h1>}
             {!err && !data && !laoding && <h1 className="shead bhead">sorry nothing to show but you can be first one who can publish you cam try it</h1>}
             {/* bolg section */}
-            {users && data ?data.map(dat => {
+            {data && data.map(dat => {
                 return <div className="blog" key={dat._id}>
                     <div className="publisher">
 
@@ -132,7 +132,7 @@ const Blog = () => {
                         <button className="edit modifyBtn "><FontAwesomeIcon icon={faEdit}></FontAwesomeIcon></button></Link>
                     </div></div>}
                 </div>
-            }):''}
+            })}
 
       {/* input section  */}
           

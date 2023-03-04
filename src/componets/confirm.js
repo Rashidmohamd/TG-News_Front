@@ -27,8 +27,7 @@ const Verify = () => {
             setSignTkn(null);
         }
     },[])
-    const verify = async (e) => {
-        e.preventDefault();
+    const verify = async () => {
         setLaoding(true)
         const res = await fetch(`${Url}/verify`, {
             method: "POST",
