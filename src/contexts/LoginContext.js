@@ -23,8 +23,7 @@ export const LoginContextProvider = ({ children }) => {
     const [msg, setMsg] = useState('');
     const [count, setCount] = useState(0);
     const [fire, setFire] = useState(false);
-    // const Url = process.env.REACT_APP_URI;
-    const Url = 'http://localhost:8000/TG-news';
+    const Url = process.env.REACT_APP_URI;
     useEffect(() => {
         const token = localStorage.getItem("user");
         const tkn = localStorage.getItem("signTkn");
