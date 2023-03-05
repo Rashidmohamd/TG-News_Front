@@ -87,7 +87,7 @@ const Signup = () => {
                 <label className='pfp' htmlFor="pfp" >
                     <img src="/gallary.png" alt="" />
                 </label>
-                <input type="file" name="profilePicture" id="pfp" onChange={e => {
+                <input type="file" accept="image/*" name="profilePicture" id="pfp" onChange={e => {
                     const pfp = document.getElementById('pfp').files[0]
                     const img = URL.createObjectURL(pfp)
                     const ppp = document.querySelector('.pfp');

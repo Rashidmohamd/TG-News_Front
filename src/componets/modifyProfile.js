@@ -66,7 +66,7 @@ const ModifyProfule = () => {
                         {!user.picture.img && <img id="img" src="/profile.jpg" alt="user alternive pic" />}
                         
                     </label>
-                <input type="file" className="hide" name="picture" id="picture" onChange={e => {
+                <input type="file" accept="image/*" className="hide" name="picture" id="picture" onChange={e => {
                     const imgFiel = document.getElementById('img')
                     const img = e.target.files[0];
                     imgFiel.setAttribute('src',URL.createObjectURL(img))

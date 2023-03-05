@@ -53,7 +53,7 @@ const BlogModify = () => {
                             
                         </label>
                     </div>
-                    <input type="file" name="image" id="file" className="hide" onChange={() => {
+                    <input type="file" accept="image/*" name="image" id="file" className="hide" onChange={() => {
                         const img = document.getElementById('img');
                         const file = document.getElementById('file').files[0];
                         img.setAttribute('src', URL.createObjectURL(file));

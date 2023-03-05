@@ -145,7 +145,7 @@ const Blog = () => {
                     <label htmlFor="img" className=" imgLab">
                         <img src="/gallary.png" alt="gallary"  className="im" />
                     </label>
-                    <input type="file" name="image" id="img" className="imgInput" onChange={() => {
+                    <input type="file" accept="image/*" name="image" id="img" className="imgInput" onChange={() => {
                         const im = document.querySelector('.imgLab');
                         const imm = document.getElementById('img')
                         const img =imm.files[0]
